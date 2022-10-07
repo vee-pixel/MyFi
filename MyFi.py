@@ -83,7 +83,7 @@ def intro():
 
 #verificar contraseña
 def checkPsswd(contraseña_ingresada):
-    contraseña = "211021"
+    contraseña = "12345"
     if contraseña_ingresada == contraseña:
         return True
 
