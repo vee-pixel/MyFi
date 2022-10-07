@@ -1,6 +1,7 @@
 import time
 import os
 import pandas as pd
+import pwinput
 
 def ERROR(): #animacion de error
     for i in range(0,3):
@@ -10,15 +11,17 @@ def ERROR(): #animacion de error
                 os.system('cls' if os.name == 'nt' else 'clear')
                 time.sleep(0.3)
 
-#menu ingresos
-def mostrar_ingresos():
+
+def mostrar_ingresos(): #menu ingresos
     os.system('cls' if os.name == 'nt' else 'clear')
     print("                       ***INGRESOS***")
     df = pd.read_csv("income.csv")
-    if df.shape[0] == 0:
+
+    if df.shape[0] == 0:  #check if dataFrame is empty
         print("marco de datos vacio.")
     else:
         print(df)
+
     print("")
     print("R- Regresar")
     seleccion = input().upper()
@@ -28,15 +31,17 @@ def mostrar_ingresos():
         ERROR()
         mostrar_ingresos()
 
-#menu gastos
-def mostrar_gastos():
+
+def mostrar_gastos(): #menu gastos
     os.system('cls' if os.name == 'nt' else 'clear')
     print("                       ***GASTOS***")
     df = pd.read_csv("Gastos.csv")
-    if df.shape[0] == 0:
+
+    if df.shape[0] == 0: #check if empty
         print("marco de datos vacio.")
     else:
         print(df)
+
     print("")
     print("R- Regresar")
     seleccion = input().upper()
@@ -55,15 +60,16 @@ def procesar_seleccion(seleccion):
         ERROR()
         menu()
         
-def menu():
+
+def menu():      #menu Display
     os.system('cls' if os.name == 'nt' else 'clear')
     print("1- Gastos")
     print("2- Ingresos")
     seleccion = str(input())
     procesar_seleccion(seleccion)
 
-#opening
-def intro():
+
+def intro():        #opening/greeting
     os.system('cls' if os.name == 'nt' else 'clear')
     palabra = "Welcome"
     palabra2 = ""
@@ -81,17 +87,17 @@ def intro():
     time.sleep(1)
     menu()
 
-#verificar contraseña
-def checkPsswd(contraseña_ingresada):
+
+def checkPsswd(contraseña_ingresada):   #verificar contraseña
     contraseña = "12345"
     if contraseña_ingresada == contraseña:
         return True
 
-#login
-def login():
+
+def login():    #login
     os.system('cls' if os.name == 'nt' else 'clear')
     contraseña = "211021"
-    contraseña_ingresada = input("Contraseña: ")
+    contraseña_ingresada = pwinput.pwinput(prompt="Contraseña: ", mask="*")
     if checkPsswd(contraseña_ingresada)==True:
         intro()
     else:
