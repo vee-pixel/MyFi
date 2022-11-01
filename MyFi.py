@@ -2,6 +2,7 @@ import time
 import os
 import pandas as pd
 import pwinput
+import csv
 
 def ERROR(): #animacion de error
     for i in range(0,3):
@@ -11,6 +12,28 @@ def ERROR(): #animacion de error
                 os.system('cls' if os.name == 'nt' else 'clear')
                 time.sleep(0.3)
 
+######### Ingresos
+def cargar_ingreso():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("[ Cargar Nuevo ingreso ]")
+
+    fecha = input("Fecha: ")
+    origen = input("Origen: ")
+    cantidad = input("Monto: ")
+    info = input("Info: ")
+
+    f = open('income.csv', 'a')
+    new_row = (fecha,origen,cantidad,info)
+    writer = csv.writer(f)
+    writer.writerow(new_row)
+
+    f.close()
+
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+    print(" ingreso Cargado")
+    time.sleep(2)
+    mostrar_ingresos()
 
 def mostrar_ingresos(): #menu ingresos
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -23,15 +46,41 @@ def mostrar_ingresos(): #menu ingresos
         print(df)
 
     print("")
+    print("N- Nuevo Ingreso")
     print("R- Regresar")
     seleccion = input().upper()
     if seleccion == "R":
         menu()
+    elif seleccion == "N":
+        cargar_ingreso()
     else:
         ERROR()
         mostrar_ingresos()
 
+#########Gastos
 
+def cargar_gasto():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("[ Cargar Nuevo Gasto ]")
+
+    fecha = input("Fecha: ")
+    origen = input("Origen: ")
+    cantidad = input("Monto: ")
+    info = input("Info: ")
+
+    f = open('Gastos.csv', 'a')
+    new_row = (fecha,origen,cantidad,info)
+    writer = csv.writer(f)
+    writer.writerow(new_row)
+
+    f.close()
+
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+    print(" Gasto Cargado")
+    time.sleep(2)
+    mostrar_gastos()
+ 
 def mostrar_gastos(): #menu gastos
     os.system('cls' if os.name == 'nt' else 'clear')
     print("                       ***GASTOS***")
@@ -43,14 +92,18 @@ def mostrar_gastos(): #menu gastos
         print(df)
 
     print("")
+    print("N- Nuevo Gasto")
     print("R- Regresar")
     seleccion = input().upper()
     if seleccion == "R":
         menu()
+    elif seleccion == "N":
+        cargar_gasto()
     else:
         ERROR()
         mostrar_gastos()
 
+# GUI
 def procesar_seleccion(seleccion):
     if seleccion == "1":
         mostrar_gastos()
